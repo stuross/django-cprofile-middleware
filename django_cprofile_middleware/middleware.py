@@ -39,7 +39,7 @@ class ProfilerMiddleware(MiddlewareMixin):
         return settings.DEBUG and 'prof' in request.GET and \
             request.user is not None and request.user.is_staff
 
-    def process_view(self, request, callback, callback_args, callback_kwargs):
+    def process_request(self, request, callback, callback_args, callback_kwargs):
         if self.can(request):
             self.profiler = profile.Profile()
             args = (request,) + callback_args
